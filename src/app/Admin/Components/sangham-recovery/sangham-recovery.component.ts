@@ -32,6 +32,7 @@ export class SanghamRecoveryComponent implements OnInit {
   appuPendingCount: any;
   MonthlyAppuListData: any;
   MonthlyMessage: any;
+  appuRecoveryTotal: any;
 
   constructor(private Services: SangamService, private router: Router) {
 
@@ -268,7 +269,9 @@ export class SanghamRecoveryComponent implements OnInit {
       this.Services.AppuRecovery(RecoveObj).subscribe((RecoveResp) => {
         if (RecoveResp.statusCode == 200) {
           this.appuRecoverydata = RecoveResp.data;
-          this.appuRecoveryCount = RecoveResp.count
+          this.appuRecoveryCount = RecoveResp.count;
+          this.appuRecoveryTotal = RecoveResp.total;
+          console.log("recover", this.appuRecoveryTotal);
            // Iterate over each item in the array and format the date
         this.appuRecoverydata.forEach((item) => {
           item.date = item.date
