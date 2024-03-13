@@ -1,0 +1,1031 @@
+<!-- START-AGENT-DETAILS -->
+
+<section class="brands_Upload_section">
+  <div class="card">
+    <div class="card-body">
+      <div class="brands_header animated zoomIn">
+        <h4 class="card-title style-color">Agents-Lists</h4>
+        <button
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          class="btn btn-dark new-add-color"
+        >
+          Add Agent
+        </button>
+      </div>
+
+      <div class="brand_details table-responsive animated zoomIn">
+        <table
+          id="myTable"
+          class="table table-striped border color-table inverse-table"
+        >
+          <thead>
+            <tr class="text-back">
+              <th>S.NO</th>
+              <th>AGENT NAME</th>
+              <th>MOBILE NO</th>
+              <th>EMAIL ID</th>
+              <th>AADHAR NO</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let data of tokendetails; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ data?.agentName }}</td>
+              <td>{{ data?.mobileNo }}</td>
+              <td>{{ data?.emailId }}</td>
+              <td>{{ data?.aadharNo }}</td>
+
+              <td class="table_actions">
+                <button
+                  class="btn-green"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#ProductviewModal"
+                  routerLink="/agent-sangham"
+                  (click)="Viewproduct(data)"
+                >
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+
+                <button
+                  class="btn-blue"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#EditAgentModal"
+                  (click)="onEdit(data)"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+
+                <!-- <button class="btn-red" type="button">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--END AGENT-DETAILS -->
+
+<!-- START-ADD-AGENT-DETAILS -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="exampleModalLabel">Add Agent Details</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="row">
+              <!-- <div class="col-md-1"></div> -->
+              <!-- <div class="col-md-10"> -->
+              <div class="form-wrap">
+                <form [formGroup]="AgentForm">
+                  <div class="form-group-wrap">
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <label>
+                          Agent Name
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (AgentForm.get('AgentName').invalid &&
+                              AgentForm.get('AgentName').touched) ||
+                            (AgentForm.get('AgentName').pristine && hasError)
+                          "
+                          type="text"
+                          class="form-control"
+                          id="AgentName"
+                          formControlName="AgentName"
+                        />
+                        <span
+                          class="error"
+                          *ngIf="
+                            (AgentForm.get('AgentName').invalid &&
+                              AgentForm.get('AgentName').touched) ||
+                            (AgentForm.get('AgentName').pristine && hasError)
+                          "
+                        >
+                          Please enter your Valid AgentName Address
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          MobileNumber
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (AgentForm.get('MobileNo').invalid &&
+                              AgentForm.get('MobileNo').touched) ||
+                            (AgentForm.get('MobileNo').pristine && hasError)
+                          "
+                          type="number"
+                          class="form-control"
+                          id="MobileNo"
+                          formControlName="MobileNo"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (AgentForm.get('MobileNo').invalid &&
+                              AgentForm.get('MobileNo').touched) ||
+                            (AgentForm.get('MobileNo').pristine && hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          EmailId
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (AgentForm.get('EmailId').invalid &&
+                              AgentForm.get('EmailId').touched) ||
+                            (AgentForm.get('EmailId').pristine && hasError)
+                          "
+                          type="EmailId"
+                          class="form-control"
+                          id="EmailId"
+                          formControlName="EmailId"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (AgentForm.get('EmailId').invalid &&
+                              AgentForm.get('EmailId').touched) ||
+                            (AgentForm.get('EmailId').pristine && hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          AaadharNo
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (AgentForm.get('AadharNo').invalid &&
+                              AgentForm.get('AadharNo').touched) ||
+                            (AgentForm.get('AadharNo').pristine && hasError)
+                          "
+                          type="number"
+                          class="form-control"
+                          id="AadharNo"
+                          formControlName="AadharNo"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (AgentForm.get('AadharNo').invalid &&
+                              AgentForm.get('AadharNo').touched) ||
+                            (AgentForm.get('AadharNo').pristine && hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          Address
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (AgentForm.get('Address').invalid &&
+                              AgentForm.get('Address').touched) ||
+                            (AgentForm.get('Address').pristine && hasError)
+                          "
+                          type="Address"
+                          class="form-control"
+                          id="Address"
+                          formControlName="Address"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (AgentForm.get('Address').invalid &&
+                              AgentForm.get('Address').touched) ||
+                            (AgentForm.get('Address').pristine && hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          Password
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (AgentForm.get('Password').invalid &&
+                              AgentForm.get('Password').touched) ||
+                            (AgentForm.get('Password').pristine && hasError)
+                          "
+                          type="Password"
+                          class="form-control"
+                          id="Password"
+                          formControlName="Password"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (AgentForm.get('Password').invalid &&
+                              AgentForm.get('Password').touched) ||
+                            (AgentForm.get('Password').pristine && hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle icone"></i>
+                                <p>AADHAR FRONT</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles($event)"
+                                class="form-control prod-img"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                id="AadharImage"
+                                formControlName="AadharImage"
+                                [class.is-invalid]="
+                                  (AgentForm.get('AadharImage')?.invalid &&
+                                    AgentForm.get('AadharImage')?.touched) ||
+                                  (AgentForm.get('AadharImage')?.pristine &&
+                                    hasError)
+                                "
+                              />
+                              <span
+                                class="error"
+                                *ngIf="
+                                  (AgentForm.get('AadharImage')?.invalid &&
+                                    AgentForm.get('AadharImage')?.touched) ||
+                                  (AgentForm.get('AadharImage')?.pristine &&
+                                    hasError)
+                                "
+                              ></span>
+                            </button>
+
+                            <div
+                              *ngFor="let url of urls; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                              />
+
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile(index)"
+                                *ngIf="RemoveImage"
+                              ></i>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle icone"></i>
+                                <p>AADHAR BACK</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles11($event)"
+                                class="form-control prod-img"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                id="AadharImage-2"
+                                formControlName="AadharImage2"
+                                [class.is-invalid]="
+                                  (AgentForm.get('AadharImage2')?.invalid &&
+                                    AgentForm.get('AadharImage2')?.touched) ||
+                                  (AgentForm.get('AadharImage2')?.pristine &&
+                                    hasError)
+                                "
+                              />
+                              <span
+                                class="error"
+                                *ngIf="
+                                  (AgentForm.get('AadharImage2')?.invalid &&
+                                    AgentForm.get('AadharImage2')?.touched) ||
+                                  (AgentForm.get('AadharImage2')?.pristine &&
+                                    hasError)
+                                "
+                              ></span>
+                            </button>
+
+                            <div
+                              *ngFor="let url of urls11; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                              />
+
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile11(index)"
+                                *ngIf="RemoveImage11"
+                              ></i>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle icone"></i>
+                                <p>TENTH MEMO</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles1($event)"
+                                class="form-control prod-img"
+                                id="Tenthmemo"
+                                formControlName="Tenthmemo"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                [class.is-invalid]="
+                                  (AgentForm.get('Tenthmemo')?.invalid &&
+                                    AgentForm.get('Tenthmemo')?.touched) ||
+                                  (AgentForm.get('Tenthmemo')?.pristine &&
+                                    hasError)
+                                "
+                              />
+                              <span
+                                class="error"
+                                *ngIf="
+                                  (AgentForm.get('Tenthmemo')?.invalid &&
+                                    AgentForm.get('Tenthmemo')?.touched) ||
+                                  (AgentForm.get('Tenthmemo')?.pristine &&
+                                    hasError)
+                                "
+                              ></span>
+                            </button>
+
+                            <div
+                              *ngFor="let url of urls1; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                              />
+
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile1(index)"
+                                *ngIf="RemoveImage1"
+                              ></i>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle icone"></i>
+                                <p>PROFILE PICTURE</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles2($event)"
+                                class="form-control prod-img"
+                                id="ProfilePic"
+                                formControlName="ProfilePic"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                [class.is-invalid]="
+                                  (AgentForm.get('ProfilePic')?.invalid &&
+                                    AgentForm.get('ProfilePic')?.touched) ||
+                                  (AgentForm.get('ProfilePic')?.pristine &&
+                                    hasError)
+                                "
+                              />
+                              <span
+                                class="error"
+                                *ngIf="
+                                  (AgentForm.get('ProfilePic')?.invalid &&
+                                    AgentForm.get('ProfilePic')?.touched) ||
+                                  (AgentForm.get('ProfilePic')?.pristine &&
+                                    hasError)
+                                "
+                              ></span>
+                            </button>
+
+                            <div
+                              *ngFor="let url of urls2; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                              />
+
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile2(index)"
+                                *ngIf="RemoveImage2"
+                              ></i>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary new-add-color1"
+            (click)="AgentFormDetails()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-ADD-AGENT-DETAILS -->
+
+<!-- START-EDIT-AGENT-DETAILS  -->
+
+<section>
+  <div
+    class="modal fade"
+    id="EditAgentModal"
+    tabindex="-1"
+    aria-labelledby="EditAgentModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog edit-size-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="EditAgentModalLabel">
+            Edit-Agent-Details
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="row">
+              <div class="form-wrap">
+                <form [formGroup]="EditAgentForm">
+                  <div class="form-group-wrap">
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <label>
+                          Agent Name
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (EditAgentForm.get('EditAgentName').invalid &&
+                              EditAgentForm.get('EditAgentName').touched) ||
+                            (EditAgentForm.get('EditAgentName').pristine &&
+                              hasError)
+                          "
+                          type="text"
+                          class="form-control"
+                          id="editAgentName"
+                          formControlName="EditAgentName"
+                        />
+                        <span
+                          class="error"
+                          *ngIf="
+                            (EditAgentForm.get('EditAgentName').invalid &&
+                              EditAgentForm.get('EditAgentName').touched) ||
+                            (EditAgentForm.get('EditAgentName').pristine &&
+                              hasError)
+                          "
+                        >
+                          Please enter your Valid AgentName Address
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          MobileNumber
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (EditAgentForm.get('EditMobileNo').invalid &&
+                              EditAgentForm.get('EditMobileNo').touched) ||
+                            (EditAgentForm.get('EditMobileNo').pristine &&
+                              hasError)
+                          "
+                          type="number"
+                          class="form-control"
+                          id="editMobileNo"
+                          formControlName="EditMobileNo"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (EditAgentForm.get('EditMobileNo').invalid &&
+                              EditAgentForm.get('EditMobileNo').touched) ||
+                            (EditAgentForm.get('EditMobileNo').pristine &&
+                              hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          EmailId
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (EditAgentForm.get('EditEmailId').invalid &&
+                              EditAgentForm.get('EditEmailId').touched) ||
+                            (EditAgentForm.get('EditEmailId').pristine &&
+                              hasError)
+                          "
+                          type="EmailId"
+                          class="form-control"
+                          id="editEmailId"
+                          formControlName="EditEmailId"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (EditAgentForm.get('EditEmailId').invalid &&
+                              EditAgentForm.get('EditEmailId').touched) ||
+                            (EditAgentForm.get('EditEmailId').pristine &&
+                              hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          AaadharNo
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (EditAgentForm.get('EditAadharNo').invalid &&
+                              EditAgentForm.get('EditAadharNo').touched) ||
+                            (EditAgentForm.get('EditAadharNo').pristine &&
+                              hasError)
+                          "
+                          type="number"
+                          class="form-control"
+                          id="editAadharNo"
+                          formControlName="EditAadharNo"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (EditAgentForm.get('EditAadharNo').invalid &&
+                              EditAgentForm.get('EditAadharNo').touched) ||
+                            (EditAgentForm.get('EditAadharNo').pristine &&
+                              hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="col-md-6 form-group">
+                        <label>
+                          Address
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (EditAgentForm.get('EditAddress').invalid &&
+                              EditAgentForm.get('EditAddress').touched) ||
+                            (EditAgentForm.get('EditAddress').pristine &&
+                              hasError)
+                          "
+                          type="Address"
+                          class="form-control"
+                          id="editAddress"
+                          formControlName="EditAddress"
+                        />
+
+                        <span
+                          class="error"
+                          *ngIf="
+                            (EditAgentForm.get('EditAddress').invalid &&
+                              EditAgentForm.get('EditAddress').touched) ||
+                            (EditAgentForm.get('EditAddress').pristine &&
+                              hasError)
+                          "
+                        >
+                          This field is required
+                        </span>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-3 text-center">
+                          <div class="specs image_specs">
+                            <label>
+                              Aadhar Front
+                              <sup>
+                                <i
+                                  class="fa fa-asterisk"
+                                  aria-hidden="true"
+                                ></i>
+                              </sup>
+                            </label>
+                            <div class="editing_image" *ngIf="IsAadharImage">
+                              <img
+                                src="{{ BaseUrl }}{{ editingAadharImage }}"
+                              />
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="
+                                  IsAadharImage = false; deleteVendorImg()
+                                "
+                              ></i>
+                            </div>
+                            <div class="specs image_specs">
+                              <span class="closewrap">
+                                <div
+                                  *ngFor="let url of urls4; let index = index"
+                                  class="blockspace"
+                                >
+                                  <img
+                                    [src]="url"
+                                    alt=""
+                                    width="100"
+                                    height="100"
+                                    class="prod-img"
+                                  />
+
+                                  <i
+                                    class="fa fa-times cross-sym"
+                                    aria-hidden="true"
+                                    (click)="removeSelectedFile4(index)"
+                                    *ngIf="RemoveImage4"
+                                  ></i>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  class="btn btn-primary addimage"
+                                >
+                                  <span>
+                                    <i class="fa fa-plus-circle"></i>
+                                    <p>EDIT AADHAR FRONT</p>
+                                  </span>
+                                  <input
+                                    type="file"
+                                    (change)="selectFiles4($event)"
+                                    accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                    class="form-control"
+                                    id="EditAadhaImages"
+                                  />
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                          <div class="specs image_specs">
+                            <label>
+                              Aadhar Back
+                              <sup>
+                                <i
+                                  class="fa fa-asterisk"
+                                  aria-hidden="true"
+                                ></i>
+                              </sup>
+                            </label>
+                            <div class="editing_image" *ngIf="IsAadharImage2">
+                              <img
+                                src="{{ BaseUrl }}{{ editingAadharImage2 }}"
+                              />
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="
+                                  IsAadharImage2 = false; deleteVendorImg()
+                                "
+                              ></i>
+                            </div>
+                            <div class="specs image_specs">
+                              <span class="closewrap">
+                                <div
+                                  *ngFor="let url of urls44; let index = index"
+                                  class="blockspace"
+                                >
+                                  <img
+                                    [src]="url"
+                                    alt=""
+                                    width="100"
+                                    height="100"
+                                    class="prod-img"
+                                  />
+
+                                  <i
+                                    class="fa fa-times cross-sym"
+                                    aria-hidden="true"
+                                    (click)="removeSelectedFile44(index)"
+                                    *ngIf="RemoveImage44"
+                                  ></i>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  class="btn btn-primary addimage"
+                                >
+                                  <span>
+                                    <i class="fa fa-plus-circle"></i>
+                                    <p>EDIT AADHAR BACK</p>
+                                  </span>
+                                  <input
+                                    type="file"
+                                    (change)="selectFiles44($event)"
+                                    accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                    class="form-control"
+                                    id="EditAadhaImages2"
+                                  />
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3 text-center">
+                          <div class="specs image_specs">
+                            <label>
+                              TENTH MEMO
+                              <sup>
+                                <i
+                                  class="fa fa-asterisk"
+                                  aria-hidden="true"
+                                ></i>
+                              </sup>
+                            </label>
+                            <div class="editing_image" *ngIf="IsTenthMemo">
+                              <img src="{{ BaseUrl }}{{ editingTenthMemo }}" />
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="IsTenthMemo = false; deleteVendorImg()"
+                              ></i>
+                            </div>
+                            <div class="specs image_specs">
+                              <span class="closewrap">
+                                <div
+                                  *ngFor="let url of urls5; let index = index"
+                                  class="blockspace"
+                                >
+                                  <img
+                                    [src]="url"
+                                    alt=""
+                                    width="100"
+                                    height="100"
+                                    class="prod-img"
+                                  />
+
+                                  <i
+                                    class="fa fa-times cross-sym"
+                                    aria-hidden="true"
+                                    (click)="removeSelectedFile5(index)"
+                                    *ngIf="RemoveImage5"
+                                  ></i>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  class="btn btn-primary addimage"
+                                >
+                                  <span>
+                                    <i class="fa fa-plus-circle"></i>
+                                    <p>EDIT TENTH MEMO</p>
+                                  </span>
+                                  <input
+                                    type="file"
+                                    (change)="selectFiles5($event)"
+                                    accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                    class="form-control"
+                                    id="EditTenthMemos"
+                                  />
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>                        
+                        <div class="col-md-3 text-center">
+                          <div class="specs image_specs">
+                            <label>
+                              Profile Image
+                              <sup>
+                                <i
+                                  class="fa fa-asterisk"
+                                  aria-hidden="true"
+                                ></i>
+                              </sup>
+                            </label>
+                            <div class="editing_image" *ngIf="IsProfileImage">
+                              <img
+                                src="{{ BaseUrl }}{{ editingProfileImage }}"
+                              />
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="
+                                  IsProfileImage = false; deleteEntityImg()
+                                "
+                              ></i>
+                            </div>
+                            <div class="specs image_specs">
+                              <span class="closewrap">
+                                <div
+                                  *ngFor="let url of urls3; let index = index"
+                                  class="blockspace"
+                                >
+                                  <img
+                                    [src]="url"
+                                    alt=""
+                                    width="100"
+                                    height="100"
+                                    class="prod-img"
+                                  />
+
+                                  <i
+                                    class="fas fa-times cross-sym"
+                                    aria-hidden="true"
+                                    (click)="removeSelectedFile3(index)"
+                                    *ngIf="RemoveImage3"
+                                  ></i>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  class="btn btn-primary addimage"
+                                >
+                                  <span>
+                                    <i class="fa fa-plus-circle"></i>
+                                    <p>EDIT PROFILE IMAGE</p>
+                                  </span>
+                                  <input
+                                    type="file"
+                                    (change)="selectFiles3($event)"
+                                    class="form-control"
+                                    id="MODELIMAGEUPLOAD3"
+                                  />
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary new-add-color1"
+            (click)="updateAgent()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-EDIT-AGENT-DETAILS  -->
+
+

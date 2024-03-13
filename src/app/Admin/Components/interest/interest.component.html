@@ -1,0 +1,178 @@
+<section>
+  <div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="back-dashboard">
+      <h5>Interest Details</h5>
+    </div>
+    <div class="add-space">
+      <div class="row">
+        <div class="modal-body">
+          <div class="card-body">
+            <!-- <div class="row"> -->
+            <div class="form-wrap">
+              <form [formGroup]="FormInterest">
+                <!-- <div class="form-group"> -->
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label>
+                      INTEREST
+                      <sup>
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                      </sup>
+                    </label>
+                    <input
+                      [class.is-invalid]="
+                        (FormInterest.get('Interest').invalid &&
+                          FormInterest.get('Interest').touched) ||
+                        (FormInterest.get('Interest').pristine && hasError)
+                      "
+                      type="number"
+                      class="form-control"
+                      id="Interest"
+                      formControlName="Interest"
+                    />
+                    <span
+                      class="error"
+                      *ngIf="
+                        (FormInterest.get('Interest').invalid &&
+                          FormInterest.get('Interest').touched) ||
+                        (FormInterest.get('Interest').pristine && hasError)
+                      "
+                    >
+                      Please enter your Interest
+                    </span>
+                  </div>
+
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-dark new-add-color" (click)="AddInterest()">
+                      Submit
+                    </button>
+                  </div>
+                  <div class="clm-md-2"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- START-SANGHAM-DETAILS -->
+<section class="brands_Upload_section">
+    <div class="card">
+      <div class="card-body">
+        <div class="brands_header animated zoomIn">
+          <h4 class="card-title">Interest-List</h4>
+        </div>
+  
+        <div class="brand_details table-responsive animated zoomIn">
+          <table
+            id="myTable"
+            class="table table-striped border color-table inverse-table"
+          >
+            <thead>
+              <tr class="text-back">
+                <th>S.NO</th>
+                <th>INTEREST</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <tr *ngFor="let data of ToInterests; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ data?.interest }}</td>
+                <td class="table_actions logo-set">
+                    <button
+                  class="btn-blue"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#EditInterestModal"
+                  (click)="onEdit(data)"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</section>
+  <!-- END-SANGHAM-DETAILS -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="EditInterestModal" tabindex="-1" aria-labelledby="EditInterestModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title style-color" id="EditInterestModalLabel">Eidt Interest</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-wrap">
+            <form [formGroup]="editInterestForm">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <label>
+                      INTEREST
+                      <sup>
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                      </sup>
+                    </label>
+                    <input
+                      [class.is-invalid]="
+                        (editInterestForm.get('Interest').invalid &&
+                        editInterestForm.get('Interest').touched) ||
+                        (editInterestForm.get('Interest').pristine && hasError)
+                      "
+                      type="number"
+                      class="form-control"
+                      id="Interest1"
+                      formControlName="Interest"
+                    />
+                    <span
+                      class="error"
+                      *ngIf="
+                        (editInterestForm.get('Interest').invalid &&
+                        editInterestForm.get('Interest').touched) ||
+                        (editInterestForm.get('Interest').pristine && hasError)
+                      "
+                    >
+                      Please enter your Interest
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary new-add-color1"
+          (click)="upDateInterest()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,135 @@
+<style>
+.card:hover {
+    cursor: pointer;
+}
+.c1 {
+    background-color: #9e4ee1;
+}
+.c2 {
+    background-color: #3297e4;
+}
+.c3 {
+    background-color: #67be7e;
+}
+.c4 {
+    background-color: #ea8859;
+}
+
+.card-stats .card-body .numbers .card-category {
+    color: #fff;
+    font-size: 15px;
+}
+  .card-stats .card-footer .stats {
+    color: #fff;
+}
+.card-title{
+  color: #fff;
+  font-size: 30px;
+}
+
+
+</style>
+
+<div class="row">
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats c1">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-globe text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Agents</p>
+              <p class="card-title">{{CountAgent}}<p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats" [routerLink]="['/agent']">
+          <i class="fa fa-refresh"></i> View More Details
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats c2">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-money-coins text-success"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Sanghams</p>
+              <p class="card-title">{{sanghamCount}}<p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats" [routerLink]="['/sangham']">
+          <i class="fa fa-calendar-o"></i>View More Details
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats c3">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-vector text-danger"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Customers</p>
+              <p class="card-title">{{customerCount}}<p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats" [routerLink]="['/customer']">
+          <i class="fa fa-clock-o"></i>View More Details
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats c4">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-favourite-28 text-primary"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Sangham Deposits</p>
+              <p class="card-title">{{productsizeCount}}<p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats" [routerLink]="['/sangham-deposits']">
+          <i class="fa fa-refresh"></i>View More Details
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

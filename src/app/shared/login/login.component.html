@@ -1,0 +1,228 @@
+<!-- <button (click)="Goto()">Click Me</button> -->
+<section class="wrapper">
+    <div class="container-fluid contact-section">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <div class="logo">
+              <img src="assets/img/Manasangam Chitfunds.png" />
+            <!-- <h3 class="ekart-logo"></h3> -->
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-10">
+                <div class="form-wrap">
+                  <form [formGroup]="LoginForm">
+                    <div class="form-group-wrap">
+                      <div class="form-group">
+                        <label>
+                          E-mail / Mobile Number
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                        [class.is-invalid]="(LoginForm.get('EmailId').invalid && 
+                        LoginForm.get('EmailId').touched) || 
+                        (LoginForm.get('EmailId').pristine && hasError)"
+
+
+                         
+                          type="text"
+                          class="form-control"
+                          id="EmailId"
+                          formControlName="EmailId"
+                        />
+                        <span
+                          class="error"
+                          *ngIf="
+                            (LoginForm.get('EmailId').invalid &&
+                              LoginForm.get('EmailId').touched) ||
+                            (LoginForm.get('EmailId').pristine && hasError)
+                          "
+                        >
+                          Please enter your Valid EmailId Address
+                        </span>
+                                  
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          Password
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+
+                        [class.is-invalid]="
+                          (LoginForm.get('Password').invalid &&
+                            LoginForm.get('Password').touched) ||
+                          (LoginForm.get('Password').pristine && hasError)
+                        "
+                          
+                          type="Password"
+                          class="form-control"
+                          id="Password"
+                          formControlName="Password"
+                        />
+
+                       <span
+                      class="error"
+                      *ngIf="
+                        (LoginForm.get('Password').invalid &&
+                          LoginForm.get('Password').touched) ||
+                        (LoginForm.get('Password').pristine && hasError)
+                      ">
+                      This field is required
+                    </span>
+                              
+                        
+                      </div>
+                     <!--  <div class="remember">
+                        <span>
+                          <input type="checkbox" /> -->
+                          <!-- <a (click)="EditLogin()">Change Password</a> 
+                        </span>-->
+                        <!-- <a data-toggle="modal" data-target="#exampleModal11">
+                          Forgot Your Password ?
+                        </a> 
+                      </div>-->
+  
+                      <button
+                        type="submit"
+                        class="btn btn-primary form-control"
+                        (click)="SignIn()"
+                      >
+                        sign in
+                      </button>
+
+                      <div class="forgot mt-4">
+                       <a href="#" (click)="adminChangePassword()"><p>Forgot password?</p></a>
+                      </div>
+
+
+                      <!-- <div class="register-page">
+                        <p>Don't have an account?</p>
+                        <a [routerLink]="['/register']">Register Here</a>
+                      </div> -->
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </section>
+
+
+  <!-- start Change Password -->
+ <div
+ class="modal fade"
+ id="changePasswordModal"
+ tabindex="-1"
+ role="dialog"
+ aria-labelledby="changePasswordModalLabel"
+ aria-hidden="true"
+>
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="changePasswordModalLabel">
+         Change Password
+       </h5>
+       <button
+         type="button"
+         class="close"
+         data-dismiss="modal"
+         aria-label="Close"
+         (click)="modelReset()"
+       >
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       <form [formGroup]="EditAdminLoginForm">
+         <div class="form-group-wrap">
+           <div class="form-group">
+             <label> EmailId </label>
+             <input
+               type="text"
+               class="form-control"
+               id="emailId"
+               formControlName="emailId"
+               [class.is-invalid]="
+                 (EditAdminLoginForm.get('emailId').invalid &&
+                   EditAdminLoginForm.get('emailId').touched) ||
+                 (EditAdminLoginForm.get('emailId').pristine && hasError)
+               "
+             />
+             <span
+               class="error"
+               *ngIf="
+                 (EditAdminLoginForm.get('emailId').invalid &&
+                   EditAdminLoginForm.get('emailId').touched) ||
+                 (EditAdminLoginForm.get('emailId').pristine && hasError)
+               "
+             >
+               This field is required
+             </span>
+           </div>
+
+           <div class="form-group">
+             <label> Change Password </label>
+             <input
+               type="password"
+               class="form-control"
+               id="password"
+               formControlName="changePassword"
+               [class.is-invalid]="
+                 (EditAdminLoginForm.get('changePassword').invalid &&
+                   EditAdminLoginForm.get('changePassword').touched) ||
+                 (EditAdminLoginForm.get('changePassword').pristine &&
+                   hasError)
+               "
+             />
+             <span
+               class="error"
+               *ngIf="
+                 (EditAdminLoginForm.get('changePassword').invalid &&
+                   EditAdminLoginForm.get('changePassword').touched) ||
+                 (EditAdminLoginForm.get('changePassword').pristine &&
+                   hasError)
+               "
+             >
+               This field is required
+             </span>
+           </div>
+         </div>
+       </form>
+     </div>
+     <div class="modal-footer">
+       <button
+         type="button"
+         class="btn btn-secondary"
+         data-dismiss="modal"
+         (click)="modelReset()"
+       >
+         Close
+       </button>
+       <button
+         type="button"
+         class="btn btn-primary"
+         (click)="changeAdminPassword()"
+       >
+       Change Password
+       </button>
+     </div>
+   </div>
+ </div>
+</div>
+<!-- end Change Password -->
+
+  
+  

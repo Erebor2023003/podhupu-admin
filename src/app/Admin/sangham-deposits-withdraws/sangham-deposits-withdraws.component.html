@@ -1,0 +1,174 @@
+<section>
+  <div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="back-dashboard">
+      <h5 class="style-color">Sangham Details</h5>
+      <button
+        type="button"
+        data-target="#exampleModal"
+        routerLink="/sangham-deposits"
+        class="btn btn-dark new-add-color"
+      >
+        Back
+      </button>
+    </div>
+    <div class="add-space">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">SANGHAM NAME :</label>
+            <p class="user-new">{{ sanghamId.sanghamName }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">AGENT NAME :</label>
+            <p class="user-new">{{ sanghamId?.agentId[0]?.agentName }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">ADDRESS :</label>
+            <p class="user-new">{{ sanghamId.address }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brands_Upload_section">
+  <div class="card">
+    <div class="card-body">
+      <div class="brands_header animated zoomIn">
+        <h4 class="card-title style-color">Sangham Deposits and Withdraw Details</h4>
+      </div>
+
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss active"
+            id="pills-home-tab"
+            data-toggle="pill"
+            data-target="#pills-home"
+            type="button"
+            role="tab"
+            aria-controls="pills-home"
+            aria-selected="true"
+          >
+            Sangham Deposits
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-profile-tab"
+            data-toggle="pill"
+            data-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            Sangham Withdraw
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content tab-contentss" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-home"
+          role="tabpanel"
+          aria-labelledby="pills-home-tab"
+        >
+          <table
+            id="myTable"
+            class="table table-striped border color-table inverse-table"
+          >
+            <thead class="table-color">
+              <tr class="text-back">
+                <th>S.NO</th>
+                <th>ADEPOSIT AMOUNT</th>
+                <th>INTEREST</th>
+                <th>TOTAL</th>
+                <th>DATE</th>
+              </tr>
+            </thead>
+
+            <tbody class="text-center">
+              <tr *ngFor="let data of SanghamDepositsData; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ data?.depositAmount }}</td>
+                <td>{{ data?.interest }}</td>
+                <td>{{ data?.total }}</td>
+                <td>{{ data?.date }}</td>
+
+                <!-- <td class="table_actions">
+                <button
+                  class="btn-green"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#ProductviewModal"
+                  routerLink="/agent-sangham"
+                  (click)="Viewproduct(data)">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+
+
+                <button
+                  class="btn-blue"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#EditAgentModal"
+                  (click)="onEdit(data)">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+
+                <button
+                  class="btn-red"
+                  type="button"
+                  (click)="Productdelete22(data)"
+                >
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+          <div class="brand_details animated zoomIn">
+            <table
+              id="myTable"
+              class="table table-striped border color-table inverse-table"
+            >
+              <thead class="table-color">
+                <tr class="text-back">
+                  <th>S.NO</th>
+                  <th>WITHDRAW AMOUNT</th>
+                  <th>TOTAL</th>
+                  <th>DATE</th>
+                  <!-- <th>Actions</th> -->
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr *ngFor="let data of SanghamWithdrawData; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ data?.withdrawAmount }}</td>
+                  <td>{{ data?.total }}</td>
+                  <td>{{ data?.date }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

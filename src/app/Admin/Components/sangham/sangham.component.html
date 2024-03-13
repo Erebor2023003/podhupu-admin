@@ -1,0 +1,958 @@
+<!-- START-SANGHAM-DETAILS -->
+
+<section class="brands_Upload_section">
+  <div class="card">
+    <div class="card-body">
+      <div class="brands_header animated zoomIn">
+        <h4 class="card-title style-color">Sangham-Lists</h4>
+        <!-- <button
+        type="button"
+        data-toggle="modal"
+        data-target="#exampleModal1"
+        class="btn btn-dark new-add-color"
+      >
+        Add Sangham
+      </button> -->
+      </div>
+
+      <div class="brand_details table-responsive animated zoomIn">
+        <table
+          id="myTable"
+          class="table table-striped border color-table inverse-table"
+        >
+          <thead>
+            <tr class="text-back">
+              <th>S.NO</th>
+              <th>SANGHAM NAME</th>
+              <th>AGENT NAME</th>
+              <th>CUSTOMER COUNT</th>
+              <th>ADDRESS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let data of tosangham; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ data?.sanghamName }}</td>
+              <td>{{ data?.agentId[0]?.agentName }}</td>
+              <td>{{ data?.customerCount }}</td>
+              <td>{{ data?.address }}</td>
+
+              <td class="table_actions logo-set">
+                <div
+                  class="logo-image-small"
+                  data-target="#exampleModal-003"
+                  data-toggle="modal"
+                  (click)="SanghamPodupu(data)"
+                >
+                  <img src="assets/img/Podhupu.png" />
+                  <p class="podhupu-size">Podhupu</p>
+                </div>
+
+                <div
+                  class="logo-image-small"
+                  data-target="#exampleModal-005"
+                  data-toggle="modal"
+                  (click)="SanghamDeposit(data)"
+                >
+                  <img src="assets/img/Deposit.png" />
+                  <p class="podhupu-size">Deposit</p>
+                </div>
+
+                <div
+                  class="logo-image-small"
+                  routerLink="/customer-sangham"
+                  (click)="customer(data)"
+                >
+                  <img src="assets/img/customer.png" />
+                  <p class="podhupu-size">Customers</p>
+                </div>
+
+                <div
+                class="logo-image-small"
+                routerLink="/sangham-recovery"
+                 (click)="customer(data)"
+              >
+                <img src="assets/img/Recovery.png" />
+                <p class="podhupu-size">Recovery</p>
+              </div>
+
+                <!-- <td class="table_actions">
+                  <button
+                    class="btn-green"
+                    type="button"
+                    data-toggle="modal"
+                    data-target="#ProductviewModal"
+                    routerLink="/agent-sangham"
+                    (click)="Viewproduct(data)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </button>
+  
+                  <button
+                    class="btn-blue"
+                    type="button"
+                    data-toggle="modal"
+                    data-target="#EditProduct"
+                    (click)="onEdit(data)">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+  
+                  <button
+                    class="btn-red"
+                    type="button"
+                    (click)="Productdelete(data)"
+                  >
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </td> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- START-SANGHAM-DETAILS -->
+
+<!-- START-SANGHAM-PODHUPU-DETAILS -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModal-003"
+    tabindex="-1"
+    aria-labelledby="exampleModal-003Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="exampleModal-003Label">
+            Podupu Details
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="modelClose()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <button
+                *ngIf="showbutton"
+                type="button"
+                class="btn btn-dark new-add-color"
+                data-toggle="modal"
+                data-target="#exampleModal-004"
+              >
+                Add PODUPU DETAILS
+              </button>
+            </div>
+            <!-- *ngIf="statusCode==200;else nodata
+              <ng-template #nodata>no data</ng-template> -->
+
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">MESSAGE :</label>
+                <p class="user-new">{{ dataMessage?.message }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">SANGHAM NAME :</label>
+                <p class="user-new">
+                  {{
+                    statusCode === 200
+                      ? Sanghampodupu?.sanghamId[0]?.sanghamName
+                      : ""
+                  }}
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">MONTHLY AMOUNT :</label>
+                <p class="user-new">{{ Sanghampodupu?.monthlyAmount }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">INTEREST :</label>
+                <p class="user-new">{{ Sanghampodupu?.interest }}<i class="fa fa-pencil icon-sangham"
+                  data-toggle="modal"
+                  *ngIf="showEditIcon"
+                  data-target="#EditInterestRateModal"
+                  (click)="onEdit(Sanghampodupu)"></i></p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">FINE :</label>
+                <p class="user-new">{{ Sanghampodupu?.fine }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">START DATE :</label>
+                <p class="user-new">{{ Sanghampodupu?.startDate }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">PODUPU PERIOD :</label>
+                <p class="user-new">{{ Sanghampodupu?.podupuPeriod }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="modelClose()"
+          >
+            Close
+          </button> -->
+
+          <button type="button" class="btn btn-primary new-add-color"
+          data-dismiss="modal"
+            (click)="modelClose()"
+          
+          >
+          Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-SANGHAM-PODHUPU-DETAILS -->
+
+<!-- START-(ADD)-SANGHAM-PODHUPU-DETAILS -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModal-004"
+    tabindex="-1"
+    aria-labelledby="exampleModal-004Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-resize">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="exampleModal-004Label">
+            Add Podupu Details
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <!-- <div class="row"> -->
+            <div class="form-wrap">
+              <form [formGroup]="SanghamPodupuForm">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label>
+                        MONTHLY AMOUNT
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamPodupuForm.get('MonthlyAmount').invalid &&
+                            SanghamPodupuForm.get('MonthlyAmount').touched) ||
+                          (SanghamPodupuForm.get('MonthlyAmount').pristine &&
+                            hasError)
+                        "
+                        type="text"
+                        class="form-control"
+                        id="MonthlyAmount"
+                        formControlName="MonthlyAmount"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamPodupuForm.get('MonthlyAmount').invalid &&
+                            SanghamPodupuForm.get('MonthlyAmount').touched) ||
+                          (SanghamPodupuForm.get('MonthlyAmount').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your MonthlyAmount
+                      </span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label>
+                        INTEREST
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamPodupuForm.get('Interest').invalid &&
+                            SanghamPodupuForm.get('Interest').touched) ||
+                          (SanghamPodupuForm.get('Interest').pristine &&
+                            hasError)
+                        "
+                        type="Interest"
+                        class="form-control"
+                        id="Interest"
+                        formControlName="Interest"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamPodupuForm.get('Interest').invalid &&
+                            SanghamPodupuForm.get('Interest').touched) ||
+                          (SanghamPodupuForm.get('Interest').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your Interest
+                      </span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label>
+                        FINE
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamPodupuForm.get('Fine').invalid &&
+                            SanghamPodupuForm.get('Fine').touched) ||
+                          (SanghamPodupuForm.get('Fine').pristine && hasError)
+                        "
+                        type="Fine"
+                        class="form-control"
+                        id="Fine"
+                        formControlName="Fine"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamPodupuForm.get('Fine').invalid &&
+                            SanghamPodupuForm.get('Fine').touched) ||
+                          (SanghamPodupuForm.get('Fine').pristine && hasError)
+                        "
+                      >
+                        Please enter your Fine
+                      </span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label>
+                        START DATE
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamPodupuForm.get('StartDate').invalid &&
+                            SanghamPodupuForm.get('StartDate').touched) ||
+                          (SanghamPodupuForm.get('StartDate').pristine &&
+                            hasError)
+                        "
+                        type="date"
+                        class="form-control"
+                        id="Start-Date"
+                        formControlName="StartDate"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamPodupuForm.get('StartDate').invalid &&
+                            SanghamPodupuForm.get('StartDate').touched) ||
+                          (SanghamPodupuForm.get('StartDate').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your StartDate
+                      </span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label>
+                        PODUPU PERIOD
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamPodupuForm.get('PodupuPeriod').invalid &&
+                            SanghamPodupuForm.get('PodupuPeriod').touched) ||
+                          (SanghamPodupuForm.get('PodupuPeriod').pristine &&
+                            hasError)
+                        "
+                        type="PodupuPeriod"
+                        class="form-control"
+                        id="PodupuPeriod"
+                        formControlName="PodupuPeriod"
+                      />
+
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamPodupuForm.get('PodupuPeriod').invalid &&
+                            SanghamPodupuForm.get('PodupuPeriod').touched) ||
+                          (SanghamPodupuForm.get('PodupuPeriod').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your PodupuPeriod
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary new-add-color"
+            
+
+            (click)="AddSanghamPodupu()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-(ADD)-SANGHAM-PODHUPU-DETAILS -->
+
+<!-- START-SANGHAM-DEPOSITS-DETAILS -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModal-005"
+    tabindex="-1"
+    aria-labelledby="exampleModal-005Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="exampleModal-005Label">
+            Deposit Details
+          </h5>
+
+          <!-- Button trigger modal -->
+
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="modelClose()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- <div class="modal-body"> -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <button
+                *ngIf="showbutton"
+                type="button"
+                class="btn btn-dark new-add-color"
+                data-toggle="modal"
+                data-target="#exampleModal-006"
+              >
+                Add Deposit details
+              </button>
+            </div>
+          </div>
+
+          <!-- *ngIf="statusCode==200;else nodata
+              <ng-template #nodata>no data</ng-template> -->
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">MESSAGE :</label>
+                <p class="user-new">{{ dataMessage?.message }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">SANGHAM NAME :</label>
+                <p class="user-new">
+                  <!-- {{ Sanghamdeposit?.sanghamId[0]?.sanghamName }} -->
+                  {{
+                    statusCode === 200
+                      ? Sanghamdeposit?.sanghamId[0]?.sanghamName
+                      : ""
+                  }}
+                </p>
+              </div>
+            </div>
+            <!-- <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">DEPOSITLIMIT :</label>
+                <p class="user-new">{{ Sanghamdeposit?.depositLimit }}</p>
+              </div>
+            </div> -->
+
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">INTEREST :</label>
+                <p class="user-new">{{ Sanghamdeposit?.interest }}
+                  <i class="fa fa-pencil icon-sangham"
+                  *ngIf="showEditIcon"
+                  data-toggle="modal"
+                  data-target="#EditDepositInterestModal"
+                  (click)="OnEdit(Sanghamdeposit)"></i>
+                
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">DEPOSIT DATE :</label>
+                <p class="user-new">{{ Sanghamdeposit?.depositDate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+        <div class="modal-footer">
+          <!-- <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="modelClose()"
+          >
+            Close
+          </button> -->
+          <button type="button" class="btn btn-primary new-add-color"
+          data-dismiss="modal"
+            (click)="modelClose()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-SANGHAM-DEPOSITS-DETAILS -->
+
+<!-- START-(ADD)-SANGHAM-DEPOSITS-DETAILS -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModal-006"
+    tabindex="-1"
+    aria-labelledby="exampleModal-006Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-resize-size">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="exampleModal-006Label">
+            Add Deposit Details
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <!-- <div class="row"> -->
+            <div class="form-wrap">
+              <form [formGroup]="SanghamdepositForm">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label>
+                        INTEREST
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamdepositForm.get('Interest').invalid &&
+                            SanghamdepositForm.get('Interest').touched) ||
+                          (SanghamdepositForm.get('Interest').pristine &&
+                            hasError)
+                        "
+                        type="Interest"
+                        class="form-control"
+                        id="DpInterest"
+                        formControlName="Interest"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamdepositForm.get('Interest').invalid &&
+                            SanghamdepositForm.get('Interest').touched) ||
+                          (SanghamdepositForm.get('Interest').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your Interest
+                      </span>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label>
+                        START DATE
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamdepositForm.get('DepositDate').invalid &&
+                            SanghamdepositForm.get('DepositDate').touched) ||
+                          (SanghamdepositForm.get('DepositDate').pristine &&
+                            hasError)
+                        "
+                        type="date"
+                        class="form-control"
+                        id="DepositDate"
+                        formControlName="DepositDate"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamdepositForm.get('DepositDate').invalid &&
+                            SanghamdepositForm.get('DepositDate').touched) ||
+                          (SanghamdepositForm.get('DepositDate').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your DepositDate
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary new-add-color"
+            (click)="AddSanghamDeposit()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-(ADD)-SANGHAM-DEPOSITS-DETAILS -->
+
+
+<!-- START-AGENT-BY-(ADD)SANGHAM-DETAILS -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModal1"
+    tabindex="-1"
+    aria-labelledby="exampleModal1Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="exampleModal1Label">Add-Sangham-Details</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="card-body">
+            <!-- <div class="row"> -->
+            <div class="form-wrap">
+              <form [formGroup]="SanghamForm">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label>
+                        START DATE
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamForm.get('StartDate').invalid &&
+                            SanghamForm.get('StartDate').touched) ||
+                          (SanghamForm.get('StartDate').pristine && hasError)
+                        "
+                        type="date"
+                        class="form-control"
+                        id="StartDate"
+                        formControlName="StartDate"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamForm.get('StartDate').invalid &&
+                            SanghamForm.get('StartDate').touched) ||
+                          (SanghamForm.get('StartDate').pristine && hasError)
+                        "
+                      >
+                        Please enter your StartDate
+                      </span>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                      <label>
+                        END DATE
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (SanghamForm.get('EndDate').invalid &&
+                            SanghamForm.get('EndDate').touched) ||
+                          (SanghamForm.get('EndDate').pristine && hasError)
+                        "
+                        type="date"
+                        class="form-control"
+                        id="EndDate"
+                        formControlName="EndDate"
+                      />
+
+                      <span
+                        class="error"
+                        *ngIf="
+                          (SanghamForm.get('EndDate').invalid &&
+                            SanghamForm.get('EndDate').touched) ||
+                          (SanghamForm.get('EndDate').pristine && hasError)
+                        "
+                      >
+                        Please enter your endtDate
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary new-add-color1"
+            (click)="AddSangham()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-AGENT-BY-(ADD)SANGHAM-DETAILS -->
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="EditInterestRateModal" tabindex="-1" aria-labelledby="EditInterestRateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-demo-size">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title style-color" id="EditInterestRateModalLabel">Edit Interest</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-wrap">
+            <form [formGroup]="editInterestRateForm">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <label>
+                      INTEREST
+                      <sup>
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                      </sup>
+                    </label>
+                    <input
+                      [class.is-invalid]="
+                        (editInterestRateForm.get('INTEREST').invalid &&
+                        editInterestRateForm.get('INTEREST').touched) ||
+                        (editInterestRateForm.get('INTEREST').pristine && hasError)
+                      "
+                      type="number"
+                      class="form-control"
+                      id="InterestRate-1"
+                      formControlName="INTEREST"
+                    />
+                    <span
+                      class="error"
+                      *ngIf="
+                        (editInterestRateForm.get('INTEREST').invalid &&
+                        editInterestRateForm.get('INTEREST').touched) ||
+                        (editInterestRateForm.get('INTEREST').pristine && hasError)
+                      "
+                    >
+                      Please enter your Interest
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary new-add-color1"
+          (click)="upDateInterestRate()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="EditDepositInterestModal" tabindex="-1" aria-labelledby="EditDepositInterestModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-demo-size">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title style-color" id="EditDepositInterestModalLabel">Edit Interest</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-wrap">
+            <form [formGroup]="editDepositInterestForm">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <label>
+                      INTEREST
+                      <sup>
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                      </sup>
+                    </label>
+                    <input
+                      [class.is-invalid]="
+                        (editDepositInterestForm.get('Dpinterest').invalid &&
+                        editDepositInterestForm.get('Dpinterest').touched) ||
+                        (editDepositInterestForm.get('Dpinterest').pristine && hasError)
+                      "
+                      type="number"
+                      class="form-control"
+                      id="InterestRate-2"
+                      formControlName="Dpinterest"
+                    />
+                    <span
+                      class="error"
+                      *ngIf="
+                        (editDepositInterestForm.get('Dpinterest').invalid &&
+                        editDepositInterestForm.get('Dpinterest').touched) ||
+                        (editDepositInterestForm.get('Dpinterest').pristine && hasError)
+                      "
+                    >
+                      Please enter your Interest
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary new-add-color1"
+          (click)="upDateDpInterest()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

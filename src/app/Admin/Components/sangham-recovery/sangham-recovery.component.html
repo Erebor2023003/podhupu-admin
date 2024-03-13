@@ -1,0 +1,770 @@
+<section>
+  <div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="add-back-button">
+      <button
+        type="button"
+        data-target="#exampleModal"
+        routerLink="/agent-sangham"
+        class="btn btn-dark new-add-color"
+      >
+        Back
+      </button>
+    </div>
+    <div class="shadow-lg back-view-point p-3 mt-4 mb-5 bg-white rounded">
+      <div class="row balance">
+        <div class="User_detailss">
+          <label class="demo-color1">SANGHAM AVAILABLE BALANCE</label>
+          <p class="user-new1">
+            <b
+              ><span class="pr-2">₹</span
+              >{{ ViewSanghamBalanceData.availableBalance }}</b
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="shadow-lg p-3 mt-4 mb-5 bg-white rounded">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="User_detailss_one">
+            <label class="demo-color1">PODHUPU</label>
+            <p class="user-new1">
+              <b
+                ><span class="pr-2">₹</span
+                >{{ ViewSanghamBalanceData.podhupuAmount }}</b
+              >
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="User_detailss_one">
+            <label class="demo-color1">DEPOSIT</label>
+            <p class="user-new1">
+              <b
+                ><span class="pr-2">₹</span
+                >{{ ViewSanghamBalanceData.depositAmount }}</b
+              >
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="User_detailss_one">
+            <label class="demo-color1">APPU</label>
+            <p class="user-new1">
+              <b
+                ><span class="pr-2">₹</span
+                >{{ ViewSanghamBalanceData.appuAmount }}</b
+              >
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="User_detailss_two">
+            <label class="demo-color1">APPU INTERST</label>
+            <p class="user-new1">
+              <b
+                ><span class="pr-2">₹</span
+                >{{ ViewSanghamBalanceData.appuInterest }}</b
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- START-ALL-CUSTOMER-PODHUPU,DEPOSITS,WITHDRAW,APPU-LISTS -->
+
+<section class="brands_Upload_section">
+  <div class="card">
+    <div class="card-body">
+      <ul
+        class="nav nav-pills pt-4 pl-4 mb-3 view-text"
+        id="pills-tab"
+        role="tablist"
+      >
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss active"
+            id="pills-home-tab"
+            data-toggle="pill"
+            data-target="#pills-home"
+            type="button"
+            role="tab"
+            aria-controls="pills-home"
+            aria-selected="true"
+          >
+            Podhupu
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-profile-tab"
+            data-toggle="pill"
+            data-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            Deposit
+          </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-status-tab-1"
+            data-toggle="pill"
+            data-target="#pills-status-1"
+            type="button"
+            role="tab"
+            aria-controls="pills-status-1"
+            aria-selected="false"
+          >
+            Appu
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content tab-contentss" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-home"
+          role="tabpanel"
+          aria-labelledby="pills-home-tab"
+        >
+          <div class="row">
+            <div class="modal-body">
+              <div class="card-body">
+                <!-- <div class="row"> -->
+                <div class="form-wrap">
+                  <form [formGroup]="FormRecovery">
+                    <!-- <div class="form-group"> -->
+                    <div class="row">
+                      <div class="col-md-5 form-group">
+                        <label>
+                          Search
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (FormRecovery.get('CustomerName').invalid &&
+                              FormRecovery.get('CustomerName').touched) ||
+                            (FormRecovery.get('CustomerName').pristine &&
+                              hasError)
+                          "
+                          type="text"
+                          class="form-control"
+                          id="CustomerName"
+                          formControlName="CustomerName"
+                          placeholder="Search Here..."
+                        />
+                      </div>
+                      <div class="col-md-5 form-group">
+                        <label>
+                          DATE
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (FormRecovery.get('Date').invalid &&
+                              FormRecovery.get('Date').touched) ||
+                            (FormRecovery.get('Date').pristine && hasError)
+                          "
+                          type="date"
+                          class="form-control"
+                          id="Date"
+                          formControlName="Date"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          type="button"
+                          class="btn btn-dark new-add-color-one"
+                          (click)="AddRecovery(); AddPending()"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ul class="nav nav-pills mb-3 mt-4" id="pills-tab" role="tablist">
+            <li class="nav-item col-md-6 d-flex" role="presentation">
+              <button
+                class="nav-link linkss active loop-size"
+                id="pills-status-tab"
+                data-toggle="pill"
+                data-target="#pills-status"
+                type="button"
+                role="tab"
+                aria-controls="pills-status"
+                aria-selected="false"
+                (click)="AddRecovery()"
+              >
+                RECOVERY
+              </button>
+              <span class="count-text">{{ RecoveryCount }}</span>
+            </li>
+
+            <li class="nav-item col-md-6" role="presentation">
+              <button
+                class="nav-link linkss loop-size"
+                id="pills-active-tab"
+                data-toggle="pill"
+                data-target="#pills-active"
+                type="button"
+                role="tab"
+                aria-controls="pills-active"
+                aria-selected="false"
+                (click)="AddPending()"
+              >
+                PENDING
+              </button>
+              <span class="pending-count">{{ dataPendingCount }}</span>
+            </li>
+          </ul>
+
+          <div class="tab-content tab-contentss" id="pills-tabContent">
+            <div
+              class="tab-pane fade"
+              id="pills-status"
+              role="tabpanel"
+              aria-labelledby="pills-status-tab"
+            >
+              <div class="container">
+                <div class="row">
+                  <div
+                    class="col-md-6 mt-2 mb-1"
+                    *ngFor="let data of dataRecovery; let i = index"
+                  >
+                    <div class="shadow-text p-3 mt-4 mb-3 bg-white rounded">
+                      <div class="d-flex">
+                        <div class="Pohupu">
+                          <img
+                            href="./index1.html"
+                            src="{{ BaseUrl }}{{
+                              data?.customer[0]?.profileImage
+                            }}"
+                            alt="#"
+                          />
+                        </div>
+                        <div class="col">
+                          <p><b>Name: </b>{{ data?.customer[0]?.firstName }}</p>
+                          <p><b>Date: </b>{{ data?.date }}</p>
+                        </div>
+                        <div class="most-point">
+                          <p><b>Amount: </b>{{ data?.Total }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="tab-pane fade"
+              id="pills-active"
+              role="tabpanel"
+              aria-labelledby="pills-active-tab"
+            >
+              <div class="container">
+                <div class="row">
+                  <div
+                    class="col-md-6 mt-2 mb-2"
+                    *ngFor="let data of dataPending; let i = index"
+                  >
+                    <div class="shadow-text p-3 mt-3 mb-2 bg-white rounded">
+                      <div class="d-flex">
+                        <div class="Pohupu">
+                          <img
+                            href="./index1.html"
+                            src="{{ BaseUrl }}{{
+                              data?.customer[0]?.profileImage
+                            }}"
+                            alt="#"
+                          />
+                        </div>
+                        <div class="col">
+                          <p><b>Name: </b>{{ data?.customer[0]?.firstName }}</p>
+                          <p><b>Date: </b>{{ data?.date }}</p>
+                        </div>
+                        <div class="most-point">
+                          <p><b>Amount: </b>{{ data?.Total }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="tab-pane fade"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+          <div class="row">
+            <div class="modal-body">
+              <div class="card-body">
+                <!-- <div class="row"> -->
+                <div class="form-wrap">
+                  <form [formGroup]="FormRecovery">
+                    <!-- <div class="form-group"> -->
+                    <div class="row">
+                      <div class="col-md-5 form-group">
+                        <label>
+                          Search
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (FormRecovery.get('CustomerName').invalid &&
+                              FormRecovery.get('CustomerName').touched) ||
+                            (FormRecovery.get('CustomerName').pristine &&
+                              hasError)
+                          "
+                          type="text"
+                          class="form-control"
+                          id="CustomerName2"
+                          formControlName="CustomerName"
+                          placeholder="Search Here..."
+                        />
+                      </div>
+                      <div class="col-md-5 form-group">
+                        <label>
+                          DATE
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (FormRecovery.get('Date').invalid &&
+                              FormRecovery.get('Date').touched) ||
+                            (FormRecovery.get('Date').pristine && hasError)
+                          "
+                          type="date"
+                          class="form-control"
+                          id="Date2"
+                          formControlName="Date"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          type="button"
+                          class="btn btn-dark new-add-color-one"
+                          (click)="AddDeposit(); AddWithdraw()"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ul class="nav nav-pills mb-3 mt-4" id="pills-tab" role="tablist">
+            <li class="nav-item col-md-6 d-flex" role="presentation">
+              <button
+                class="nav-link linkss active loop-size"
+                id="pills-recoverystatus-tab"
+                data-toggle="pill"
+                data-target="#pills-recoverystatus"
+                type="button"
+                role="tab"
+                aria-controls="pills-recoverystatus"
+                aria-selected="false"
+                (click)="AddDeposit()"
+              >
+                DEPOSIT
+              </button>
+              <span class="count-text-deposit">{{ DepositRecoveryCount }}</span>
+            </li>
+
+            <li class="nav-item col-md-6" role="presentation">
+              <button
+                class="nav-link linkss loop-size"
+                id="pills-recoveryactive-tab"
+                data-toggle="pill"
+                data-target="#pills-recoveryactive"
+                type="button"
+                role="tab"
+                aria-controls="pills-recoveryactive"
+                aria-selected="false"
+                (click)="AddWithdraw()"
+              >
+                WITHDRAW
+              </button>
+              <span class="pending-count-withdra">{{
+                WithdraRecoveryCount
+              }}</span>
+            </li>
+          </ul>
+
+          <div class="tab-content tab-contentss" id="pills-tabContent">
+            <div
+              class="tab-pane fade"
+              id="pills-recoverystatus"
+              role="tabpanel"
+              aria-labelledby="pills-recoverystatus-tab"
+            >
+              <div class="container">
+                <div class="row">
+                  <div
+                    class="col-md-6 mt-2 mb-2"
+                    *ngFor="let data of DepositRecoverydata; let i = index"
+                  >
+                    <div class="shadow-text p-3 mt-3 mb-2 bg-white rounded">
+                      <div class="d-flex">
+                        <div class="Pohupu">
+                          <img
+                            href="./index1.html"
+                            src="{{ BaseUrl }}{{
+                              data?.customer[0]?.profileImage
+                            }}"
+                            alt="#"
+                          />
+                        </div>
+                        <div class="col-deposit-1">
+                          <p><b>Name: </b>{{ data?.customer[0]?.firstName }}</p>
+                          <p><b>Date: </b>{{ data?.date }}</p>
+                        </div>
+                        <div class="col-deposit-1">
+                          <p><b>DepositAmount: </b>{{ data?.depositAmount }}</p>
+                          <p><b>Withdraw: </b>{{ data?.withdraw }}</p>
+                          <p><b>Total: </b>{{ data?.total }}</p>
+                        </div>
+                        <!-- <div class="most-point">
+                          <p><b>Amount: </b>{{ data?.total }}</p>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="tab-pane fade"
+              id="pills-recoveryactive"
+              role="tabpanel"
+              aria-labelledby="pills-recoveryactive-tab"
+            >
+              <div class="container">
+                <div class="row">
+                  <div
+                    class="col-md-6 mt-2 mb-2"
+                    *ngFor="let data of WithdraRecoverydata; let i = index"
+                  >
+                    <div class="shadow-text p-3 mt-3 mb-2 bg-white rounded">
+                      <div class="d-flex">
+                        <div class="Pohupu">
+                          <img
+                            href="./index1.html"
+                            src="{{ BaseUrl }}{{
+                              data?.customer[0]?.profileImage
+                            }}"
+                            alt="#"
+                          />
+                        </div>
+                        <div class="col-deposit">
+                          <p><b>Name: </b>{{ data?.customer[0]?.firstName }}</p>
+                          <p><b>Date: </b>{{ data?.date }}</p>
+                        </div>
+                        <div class="col">
+                          <p><b>Amount: </b>{{ data?.amount }}</p>
+                          <p><b>Total: </b>{{ data?.total }}</p>
+                        </div>
+                        <!-- <div class="most-point">
+                          <p><b>Amount: </b>{{ data?.total }}</p>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="tab-pane fade"
+          id="pills-status-1"
+          role="tabpanel"
+          aria-labelledby="pills-status-tab-1"
+        >
+          <div class="row">
+            <div class="modal-body">
+              <div class="card-body">
+                <!-- <div class="row"> -->
+                <div class="form-wrap">
+                  <form [formGroup]="FormRecovery">
+                    <!-- <div class="form-group"> -->
+                    <div class="row">
+                      <div class="col-md-5 form-group">
+                        <label>
+                          Search
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (FormRecovery.get('CustomerName').invalid &&
+                              FormRecovery.get('CustomerName').touched) ||
+                            (FormRecovery.get('CustomerName').pristine &&
+                              hasError)
+                          "
+                          type="text"
+                          class="form-control"
+                          id="CustomerName3"
+                          formControlName="CustomerName"
+                          placeholder="Search Here..."
+                        />
+                      </div>
+                      <div class="col-md-5 form-group">
+                        <label>
+                          DATE
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <input
+                          [class.is-invalid]="
+                            (FormRecovery.get('Date').invalid &&
+                              FormRecovery.get('Date').touched) ||
+                            (FormRecovery.get('Date').pristine && hasError)
+                          "
+                          type="date"
+                          class="form-control"
+                          id="Date3"
+                          formControlName="Date"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          type="button"
+                          class="btn btn-dark new-add-color-one"
+                          (click)="AddAppuPending(); AddAppuRecovery(); MonthlyAppuList()"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ul class="nav nav-pills mb-3 mt-4" id="pills-tab" role="tablist">
+            <li class="nav-item col-md-4 d-flex" role="presentation">
+              <button
+                class="nav-link linkss active loop-size"
+                id="pills-appurecoverystatus-tab"
+                data-toggle="pill"
+                data-target="#pills-appurecoverystatus"
+                type="button"
+                role="tab"
+                aria-controls="pills-appurecoverystatus"
+                aria-selected="false"
+                (click)="AddAppuRecovery()"
+              >
+                RECOVERY
+              </button>
+              <span class="count-text-appu">{{ appuRecoveryCount }}</span>
+            </li>
+
+            <li class="nav-item col-md-4" role="presentation">
+              <button
+                class="nav-link linkss loop-size"
+                id="pills-appurecoveryactive-tab"
+                data-toggle="pill"
+                data-target="#pills-appurecoveryactive"
+                type="button"
+                role="tab"
+                aria-controls="pills-appurecoveryactive"
+                aria-selected="false"
+                (click)="AddAppuPending()"
+              >
+                PENDING
+              </button>
+              <span class="count-text-appu">{{ appuPendingCount }}</span>
+            </li>
+
+
+            <li class="nav-item col-md-4" role="presentation">
+              <button
+                class="nav-link linkss loop-size"
+                id="pills-appumonthly-tab"
+                data-toggle="pill"
+                data-target="#pills-appumonthly"
+                type="button"
+                role="tab"
+                aria-controls="pills-appumonthly"
+                aria-selected="false"
+                (click)="MonthlyAppuList()"
+              >
+                APPULIST
+              </button>
+              <span class="count-text-appu">{{ MonthlyMessage?.count }}</span>
+            </li>
+          </ul>
+
+          <div class="tab-content tab-contentss" id="pills-tabContent">
+            <div
+              class="tab-pane fade"
+              id="pills-appurecoverystatus"
+              role="tabpanel"
+              aria-labelledby="pills-appurecoverystatus-tab"
+            >
+              <div class="container">
+                <div class="row">
+                  <div
+                    class="col-md-6 mt-2 mb-2"
+                    *ngFor="let data of appuRecoverydata; let i = index"
+                  >
+                    <div class="shadow-text p-3 mt-3 mb-2 bg-white rounded">
+                      <div class="d-flex">
+                        <div class="Pohupu m-auto">
+                          <img
+                            href="./index1.html"
+                            src="{{ BaseUrl }}{{
+                              data?.customer[0]?.profileImage
+                            }}"
+                            alt="#"
+                          />
+                        </div>
+                        <div class="col-deposit">
+                          <p><b>Name: </b>{{ data?.customer[0]?.firstName }}</p>
+                          <p><b>AppuAmount: </b>{{ data?.appuAmount }}</p>
+                          <p><b>Interest: </b>{{ data?.interest }}</p>
+                          <p><b>PaidAmount: </b>{{ data?.paidAmount }}</p>
+                        </div>
+                        <div class="col-deposit">
+                          <p><b>Date: </b>{{ data?.date }}</p>
+                          <p><b>Fine: </b>{{ data?.fine }}</p>
+                          <p><b>Total: </b>{{ data?.total }}</p>
+                        </div>
+                        <!-- <div class="most-point">
+                        <p><b>Amount: </b>{{ data?.Total }}</p>
+                      </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="tab-pane fade"
+              id="pills-appurecoveryactive"
+              role="tabpanel"
+              aria-labelledby="pills-appurecoveryactive-tab"
+            >
+              <div class="container">
+                <div class="row">
+                  <div
+                    class="col-md-6 mt-2 mb-2"
+                    *ngFor="let data of appuPendingdata; let i = index"
+                  >
+                    <div class="shadow-text p-3 mt-3 mb-2 bg-white rounded">
+                      <div class="d-flex">
+                        <div class="Pohupu m-auto">
+                          <img
+                            href="./index1.html"
+                            src="{{ BaseUrl }}{{
+                              data?.customer[0]?.profileImage
+                            }}"
+                            alt="#"
+                          />
+                        </div>
+                        <div class="col-deposit">
+                          <p><b>Name: </b>{{ data?.customer[0]?.firstName }}</p>
+                          <p><b>AppuAmount: </b>{{ data?.appuAmount }}</p>
+                          <p><b>Interest: </b>{{ data?.interest }}</p>
+                          <p><b>PaidAmount: </b>{{ data?.paidAmount }}</p>
+                        </div>
+                        <div class="col-deposit">
+                          <p><b>Date: </b>{{ data?.date }}</p>
+                          <p><b>Fine: </b>{{ data?.fine }}</p>
+                          <p><b>Total: </b>{{ data?.total }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div
+            class="tab-pane fade"
+            id="pills-appumonthly"
+            role="tabpanel"
+            aria-labelledby="pills-appumonthly-tab"
+          >
+            <div class="container">
+              <div class="row">
+                <div
+                  class="col-md-6 mt-2 mb-2"
+                  *ngFor="let data of MonthlyAppuListData; let i = index"
+                >
+                  <div class="shadow-text p-3 mt-3 mb-2 bg-white rounded">
+                    <div class="d-flex">
+                      <div class="Pohupu m-auto">
+                        <img
+                          href="./index1.html"
+                          src="{{ BaseUrl }}{{
+                            data?.customerId[0]?.profileImage
+                          }}"
+                          alt="#"
+                        />
+                      </div>
+                      <div class="col-deposit">
+                        <p><b>Name: </b>{{ data?.customerId[0]?.firstName }}</p>
+                        <p><b>AppuAmount: </b>{{ data?.appuAmount }}</p>
+                        <p><b>Interest: </b>{{ data?.interest }}</p>
+                        <p><b>PaidAmount: </b>{{ data?.paidAmount }}</p>
+                      </div>
+                      <div class="col-deposit">
+                        <p><b>Date: </b>{{ data?.date }}</p>
+                        <p><b>DueDate: </b>{{ data?.dueDate }}</p>
+                        <p><b>Fine: </b>{{ data?.fine }}</p>
+                        <p><b>Total: </b>{{ data?.total }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-ALL-CUSTOMER-PODHUPU,DEPOSITS,WITHDRAW,APPU-LISTS -->

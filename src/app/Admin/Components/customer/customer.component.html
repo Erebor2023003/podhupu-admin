@@ -1,0 +1,803 @@
+<!-- START-CUSTOMER-DETAILS -->
+
+<section class="brands_Upload_section">
+  <div class="card">
+    <div class="card-body">
+      <div class="brands_header animated zoomIn">
+        <h4 class="card-title style-color">Customer-List</h4>
+      </div>
+
+      <div class="brand_details table-responsive animated zoomIn">
+        <table
+          id="myTable"
+          class="table table-striped border color-table inverse-table"
+        >
+          <thead>
+            <tr class="text-back">
+              <th>S.NO</th>
+              <th>CUSTOMER NAME</th>
+              <th>SANGHAM NAME</th>
+              <th>MOBILE NO</th>
+              <th>STATUS</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let data of tocustomer; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ data?.firstName }}</td>
+              <td>{{ data?.sanghamId[0]?.sanghamName }}</td>
+              <td>{{ data?.mobileNo }}</td>
+              <td
+                [style.color]="data?.textColor"
+              >
+                {{ data?.status }}
+                <i class="fa fa-pencil icon-block"
+                (click)="openModal(data)"
+                ></i>
+
+              </td>
+
+              <td class="table_actions logo-set">
+                <div
+                  class="logo-image-small"
+                  data-toggle="modal"
+                  data-target="#ProductviewModal"
+                  routerLink="/view-customer"
+                  (click)="ViewCustomer(data)"
+                >
+                  <button class="back-color" type="button">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                  <p class="podhupu-size1">View</p>
+                </div>
+
+                <div class="logo-image-small" (click)="OnEdit(data)">
+                  <button class="back-color" type="button">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <p class="podhupu-size1">Update</p>
+                </div>
+
+                <div class="logo-image-small" (click)="Ondelete(data)">
+                  <button class="back-color" type="button">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                  <p class="podhupu-size1">Delete</p>
+                </div>
+
+                <div
+                  class="logo-image-small"
+                  (click)="CustomerListAppu(data)"
+                  data-target="#exampleModal004"
+                  data-toggle="modal">
+                  <img src="assets/img/Appu.png" />
+                  <p class="podhupu-size">Appu</p>
+                </div>
+
+                <!-- <td class="table_actions">
+                    <button
+                      class="btn-green"
+                      type="button"
+                      data-toggle="modal"
+                      data-target="#ProductviewModal"
+                      routerLink="/agent-sangham"
+                      (click)="Viewproduct(data)">
+                      <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
+    
+                    <button
+                      class="btn-blue"
+                      type="button"
+                      data-toggle="modal"
+                      data-target="#EditProduct"
+                      (click)="onEdit(data)">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+    
+                    <button
+                      class="btn-red"
+                      type="button"
+                      (click)="Productdelete(data)"
+                    >
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-CUSTOMER-DETAILS -->
+
+<!-- START-CUSTOMER-APPU-DETAILS -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModal004"
+    tabindex="-1"
+    aria-labelledby="exampleModal004Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="exampleModal004Label">Customer Appu Details</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="modelClose()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- <div class="modal-body"> -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <button
+                *ngIf="showbutton"
+                type="button"
+                class="btn btn-dark new-add-color"
+                data-toggle="modal"
+                data-target="#exampleModal0005"
+                (click)="getInterestsList()"
+              >
+                Add Appu Details
+              </button>
+            </div>
+
+            <!-- *ngIf="statusCode==200;else nodata
+              <ng-template #nodata>no data</ng-template> -->
+
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">MESSAGE :</label>
+                <p class="user-new">{{ dataMessage?.message }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">APPUDATE :</label>
+                <p class="user-new">{{ CustomerAppuDetails?.appuDate }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">INTEREST :</label>
+                <p class="user-new">{{ CustomerAppuDetails?.interest }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">TIME PERIOD :</label>
+                <p class="user-new">{{ CustomerAppuDetails?.timePeriod }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="User_detailss text-color">
+                <label class="demo-color">FINE :</label>
+                <p class="user-new">{{ CustomerAppuDetails?.fine }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="modelClose()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-CUSTOMER-APPU-DETAILS -->
+
+<!-- START-CUSTOMER-(ADD)APPU-DETAILS -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModal0005"
+    tabindex="-1"
+    aria-labelledby="exampleModal0005Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-resize">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="exampleModal0005Label">
+            Add Appu Details
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="form-wrap">
+              <form [formGroup]="CustomerAppuForm">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label>
+                        APPU DATE
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (CustomerAppuForm.get('AppuDate').invalid &&
+                            CustomerAppuForm.get('AppuDate').touched) ||
+                          (CustomerAppuForm.get('AppuDate').pristine &&
+                            hasError)
+                        "
+                        type="date"
+                        class="form-control"
+                        id="AppuDate"
+                        formControlName="AppuDate"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (CustomerAppuForm.get('AppuDate').invalid &&
+                            CustomerAppuForm.get('AppuDate').touched) ||
+                          (CustomerAppuForm.get('AppuDate').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your AppuDate
+                      </span>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label>
+                        INTEREST
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (CustomerAppuForm.get('Interest').invalid &&
+                            CustomerAppuForm.get('Interest').touched) ||
+                          (CustomerAppuForm.get('Interest').pristine &&
+                            hasError)
+                        "
+                        type="Interest"
+                        class="form-control"
+                        id="Interest"
+                        formControlName="Interest"
+                        readonly
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (CustomerAppuForm.get('Interest').invalid &&
+                            CustomerAppuForm.get('Interest').touched) ||
+                          (CustomerAppuForm.get('Interest').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your Interest
+                      </span>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label>
+                        TIME PERIOD
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (CustomerAppuForm.get('TimePeriod').invalid &&
+                            CustomerAppuForm.get('TimePeriod').touched) ||
+                          (CustomerAppuForm.get('TimePeriod').pristine &&
+                            hasError)
+                        "
+                        type="number"
+                        class="form-control"
+                        id="TimePeriod"
+                        formControlName="TimePeriod"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (CustomerAppuForm.get('TimePeriod').invalid &&
+                            CustomerAppuForm.get('TimePeriod').touched) ||
+                          (CustomerAppuForm.get('TimePeriod').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your TimePeriod
+                      </span>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label>
+                        FINE
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (CustomerAppuForm.get('Fine').invalid &&
+                            CustomerAppuForm.get('Fine').touched) ||
+                          (CustomerAppuForm.get('Fine').pristine && hasError)
+                        "
+                        type="number"
+                        class="form-control"
+                        id="Fine"
+                        formControlName="Fine"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (CustomerAppuForm.get('Fine').invalid &&
+                            CustomerAppuForm.get('Fine').touched) ||
+                          (CustomerAppuForm.get('Fine').pristine && hasError)
+                        "
+                      >
+                        Please enter your Fine
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary new-add-color"
+            (click)="AddcustomerAppu()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-CUSTOMER-(ADD)APPU-DETAILS -->
+
+<!-- START-EDIT-CUSTOMER-DETAILS -->
+<section>
+  <div
+    class="modal fade"
+    id="EditCustomerModal"
+    tabindex="-1"
+    aria-labelledby="EditCustomerModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title style-color" id="EditCustomerModallLabel">
+            Edit-Customer-Details
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="form-wrap">
+              <form [formGroup]="editCustomerForm">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label>
+                        FirstName
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (editCustomerForm.get('FirstName').invalid &&
+                            editCustomerForm.get('FirstName').touched) ||
+                          (editCustomerForm.get('FirstName').pristine &&
+                            hasError)
+                        "
+                        type="text"
+                        class="form-control"
+                        id="FirstName"
+                        formControlName="FirstName"
+                      />
+                      <span
+                        class="error"
+                        *ngIf="
+                          (editCustomerForm.get('FirstName').invalid &&
+                            editCustomerForm.get('FirstName').touched) ||
+                          (editCustomerForm.get('FirstName').pristine &&
+                            hasError)
+                        "
+                      >
+                        Please enter your Valid FirstName
+                      </span>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                      <label>
+                        MobileNumber
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (editCustomerForm.get('MobileNo').invalid &&
+                            editCustomerForm.get('MobileNo').touched) ||
+                          (editCustomerForm.get('MobileNo').pristine &&
+                            hasError)
+                        "
+                        type="number"
+                        class="form-control"
+                        id="MobileNo"
+                        formControlName="MobileNo"
+                      />
+
+                      <span
+                        class="error"
+                        *ngIf="
+                          (editCustomerForm.get('MobileNo').invalid &&
+                            editCustomerForm.get('MobileNo').touched) ||
+                          (editCustomerForm.get('MobileNo').pristine &&
+                            hasError)
+                        "
+                      >
+                        This field is required
+                      </span>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                      <label>
+                        AaadharNo
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (editCustomerForm.get('AadharNo').invalid &&
+                            editCustomerForm.get('AadharNo').touched) ||
+                          (editCustomerForm.get('AadharNo').pristine &&
+                            hasError)
+                        "
+                        type="number"
+                        class="form-control"
+                        id="AadharNo"
+                        formControlName="AadharNo"
+                      />
+
+                      <span
+                        class="error"
+                        *ngIf="
+                          (editCustomerForm.get('AadharNo').invalid &&
+                            editCustomerForm.get('AadharNo').touched) ||
+                          (editCustomerForm.get('AadharNo').pristine &&
+                            hasError)
+                        "
+                      >
+                        This field is required
+                      </span>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                      <label>
+                        Address
+                        <sup>
+                          <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </sup>
+                      </label>
+                      <input
+                        [class.is-invalid]="
+                          (editCustomerForm.get('Address').invalid &&
+                            editCustomerForm.get('Address').touched) ||
+                          (editCustomerForm.get('Address').pristine && hasError)
+                        "
+                        type="Address"
+                        class="form-control"
+                        id="Address"
+                        formControlName="Address"
+                      />
+
+                      <span
+                        class="error"
+                        *ngIf="
+                          (editCustomerForm.get('Address').invalid &&
+                            editCustomerForm.get('Address').touched) ||
+                          (editCustomerForm.get('Address').pristine && hasError)
+                        "
+                      >
+                        This field is required
+                      </span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                      <div class="specs image_specs">
+                        <label>
+                          Aadhar Front
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <div class="editing_image" *ngIf="IsAadharImage">
+                          <img src="{{ BaseUrl }}{{ editingAadharImage }}" />
+                          <i
+                            class="fa fa-times cross-sym"
+                            aria-hidden="true"
+                            (click)="IsAadharImage = false; deleteVendorImg()"
+                          ></i>
+                        </div>
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <div
+                              *ngFor="let url of urls2; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                                class="prod-img"
+                              />
+  
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile2(index)"
+                                *ngIf="RemoveImage2"
+                              ></i>
+                            </div>
+  
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle"></i>
+                                <p>EDIT AADHAR FRONT</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles2($event)"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                class="form-control"
+                                id="MODELIMAGEUPLOAD"
+                              />
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col-md-4 text-center">
+                      <div class="specs image_specs">
+                        <label>
+                          Aadhar Back
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <div class="editing_image" *ngIf="IsAadharImage2">
+                          <img src="{{ BaseUrl }}{{ editingAadharImage2 }}" />
+                          <i
+                            class="fa fa-times cross-sym"
+                            aria-hidden="true"
+                            (click)="IsAadharImage2 = false; deleteVendorImg()"
+                          ></i>
+                        </div>
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <div
+                              *ngFor="let url of urls22; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                                class="prod-img"
+                              />
+  
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile22(index)"
+                                *ngIf="RemoveImage22"
+                              ></i>
+                            </div>
+  
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle"></i>
+                                <p>EDIT AADHAR BACK</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles22($event)"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                class="form-control"
+                                id="MODELIMAGEUPLOAD2"
+                              />
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col-md-4 text-center">
+                      <div class="specs image_specs">
+                        <label>
+                          Profile Image
+                          <sup>
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                          </sup>
+                        </label>
+                        <div class="editing_image" *ngIf="IsProfileImage">
+                          <img src="{{ BaseUrl }}{{ editingProfileImage }}" />
+                          <i
+                            class="fa fa-times cross-sym"
+                            aria-hidden="true"
+                            (click)="IsProfileImage = false; deleteEntityImg()"
+                          ></i>
+                        </div>
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <div
+                              *ngFor="let url of urls3; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                                class="prod-img"
+                              />
+  
+                              <i
+                                class="fas fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile3(index)"
+                                *ngIf="RemoveImage3"
+                              ></i>
+                            </div>
+  
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle"></i>
+                                <p>EDIT PROFILE IMAGE</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles3($event)"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                class="form-control"
+                                id="MODELIMAGEUPLOAD1"
+                              />
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary new-add-color"
+            
+            (click)="updateCustomer()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END-EDIT-CUSTOMER-DETAILS -->
+
+<!--START-EDIT-STATUS-ON CUSTOMER-(BLOCK) -->
+
+<section>
+  <div
+    class="modal fade"
+    id="exampleModalBlock"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    style="background-color: rgba(0, 0, 0, 0.5)"
+    #myModal
+  >
+    <div class="modal-dialog modal-dialog-centered" style="width: 450px">
+      <div class="modal-content">
+      <!-- <div class="modal-header">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+        (click)="closeModal()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+        <div class="modal-body">
+          <div class="card-body">
+            <h6 class="text-center">Do you want to <span id="innerH6" style="color: red;"></span> the customer</h6>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="closeModal()"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            style="background-color: red"
+            (click)="unblockCustomer()"
+          >
+            Yes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--END- EDIT-STATUS-ON CUSTOMER-(BLOCK) -->

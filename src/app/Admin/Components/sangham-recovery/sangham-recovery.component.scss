@@ -1,0 +1,232 @@
+.add-space {
+    padding: 30px;
+    // margin: 30px 10px;
+  }
+  
+  .back-dashboard {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .new-add-color {
+    background-image: linear-gradient(to right, #e975ff, #776efd) !important;
+  }
+
+  .new-add-color-one {
+    margin-top: 25px;
+    background-image: linear-gradient(to right,#e975ff,#776efd)!important;
+}
+  
+  .text-color {
+    display: flex;
+  }
+  
+  .demo-color {
+    color: blueviolet !important;
+  }
+  .demo-color1 {
+    color: blueviolet !important;
+    font-size: 15px;
+  }
+  
+  .user-new {
+    padding-left: 13px;
+  }
+
+  .user-new1{
+    text-align: center;
+    font-size: 25px;
+  }
+  
+  .demo-color {
+    color: blueviolet !important;
+    font-weight: 500;
+  }
+  
+  .image-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .image-text img {
+    max-width: 200px;
+    height: 200px;
+  }
+  
+  //   
+  //   nav
+  
+  .linkss {
+    border: none;
+    margin-right: 10px;
+    padding: 15px 15px;
+    outline: none;
+  }
+  
+  .nav-pills .nav-link.active,
+  .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #776efd;
+  }
+  
+  .card-title {
+    margin-bottom: 1.75rem;
+  }
+  
+  .text-back {
+    background-color: #e559ff !important;
+  }
+  
+  .table-color {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .style-color{
+    text-transform: uppercase;
+     background-color: #e274ff;
+     color: whitesmoke;
+     padding: 5px 15px;
+     border-radius: 5px;
+     font-size: 20px;
+  }
+  .Pohupu img{
+    width: 90px;
+    height: 100px;
+    border-radius: 20%;
+    // margin-top: 15px;
+    margin-left: 10px;
+  }
+
+  .col {
+    margin-left: 10px;
+    padding-left: 24px;
+    margin-top: 10px;
+  }
+  .col-deposit{
+    margin-left: 0px;
+    padding-left: 8px;
+    margin-top: 10px;
+  }
+  .col-deposit-1{
+    margin-left: 0px;
+    padding-left: 6px;
+    margin-top: 10px;
+  }
+  
+  .most-point p {
+    margin-top: 30px;
+  }
+  .shadow-text{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+  .rounded {
+    border-radius: 1.25rem !important;
+}
+.loop-size{
+    margin-left: 8rem;
+}
+
+.count-text-appu{
+
+  border-radius: 100%;
+  color: whitesmoke;
+  font-size: 12px;
+  font-weight: 500;
+  height: 25px;
+  line-height: 20px;
+  position: absolute;
+  right: 25%;
+  text-align: center;
+  top: 65%;
+  width: 25px;
+  padding: 2px;
+  background-color: #e274ff;
+
+}
+.count-text{
+    border-radius: 100%;
+    color: whitesmoke;
+    font-size: 12px;
+    font-weight: 500;
+    height: 25px;
+    line-height: 20px;
+    position: absolute;
+    right: 48%;
+    text-align: center;
+    top: 60%;
+    width: 25px;
+    padding: 2px;
+    background-color: #e274ff;
+}
+
+.pending-count{
+  border-radius: 100%;
+  color: whitesmoke;
+  font-size: 12px;
+  font-weight: 500;
+  height: 25px;
+  line-height: 20px;
+  position: absolute;
+  right: 50%;
+  text-align: center;
+  top: 60%;
+  width: 25px;
+  padding: 2px;
+  background-color: #e274ff;
+}
+.add-back-button{
+  float: right;
+  margin-top: 20px;
+}
+.view-text{
+  display: flex;
+  justify-content: space-around;
+}
+.back-view-point{
+  width: 50%;
+  margin: auto;
+}
+.balance{
+  justify-content: center;
+}
+.User_detailss_one{
+  text-align: center;
+  border-right: 2px solid blueviolet;
+}
+.User_detailss_two{
+  text-align: center;
+}
+.count-text-deposit{
+  border-radius: 100%;
+  color: whitesmoke;
+  font-size: 12px;
+  font-weight: 500;
+  height: 25px;
+  line-height: 20px;
+  position: absolute;
+  right: 52%;
+  text-align: center;
+  top: 60%;
+  width: 25px;
+  padding: 2px;
+  background-color: #e274ff;
+}
+.pending-count-withdra{
+  border-radius: 100%;
+  color: whitesmoke;
+  font-size: 12px;
+  font-weight: 500;
+  height: 25px;
+  line-height: 20px;
+  position: absolute;
+  right: 47%;
+  text-align: center;
+  top: 60%;
+  width: 25px;
+  padding: 2px;
+  background-color: #e274ff;
+
+}

@@ -1,0 +1,306 @@
+<!-- START VIEW-CUSTOMER-DETAILS -->
+
+<section>
+  <div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="back-dashboard">
+      <h5 class="style-color">View Customer Details</h5>
+      <button
+        type="button"
+        data-target="#exampleModal"
+        (click)="goBack()"
+        class="btn btn-dark new-add-color"
+      >
+        Back
+      </button>
+    </div>
+    <div class="add-space">
+      <div class="row">
+        <!-- *ngIf="statusCode==200;else nodata
+                  <ng-template #nodata>no data</ng-template> -->
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">First Name :</label>
+            <p class="user-new">{{ customerId?.firstName }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">Mobile No :</label>
+            <p class="user-new">{{ customerId?.mobileNo }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">AadharNo :</label>
+            <p class="user-new">{{ customerId?.aadharNo }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">Address:</label>
+            <p class="user-new">{{ customerId?.address }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">Status :</label>
+            <p class="user-new">{{ customerId?.status }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="User_detailss text-color">
+            <label class="demo-color">SanghamName :</label>
+            <p class="user-new">{{ customerId?.sanghamId[0].sanghamName }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="User_detailss image-text">
+            <label class="demo-color">AADHAR FRONT :</label>
+            <img src="{{ BaseUrl }}{{ customerId?.aadharImage }}" alt="#" />
+            <!-- <p>{{ agentId?.aadharImage }}</p> -->
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="User_detailss image-text">
+            <label class="demo-color">AADHAR BACK :</label>
+            <img src="{{ BaseUrl }}{{ customerId?.aadharImage2 }}" alt="#" />
+            <!-- <p>{{ agentId?.aadharImage }}</p> -->
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="User_detailss image-text">
+            <label class="demo-color">PROFILI PICTURE :</label>
+            <img src="{{ BaseUrl }}{{ customerId?.profileImage }}" alt="#" />
+            <!-- <p>{{ agentId?.profilePicture }}</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-VIEW-CUSTOMER-DETAILS -->
+
+<!-- START-ALL-CUSTOMER-PODHUPU,DEPOSITS,WITHDRAW,APPU-LISTS -->
+
+<section class="brands_Upload_section">
+  <div class="card">
+    <div class="card-body">
+      <!-- <div class="brands_header animated zoomIn">
+          <h4 class="card-title">Sangham Deposits and Withdraw Details</h4>
+        </div> -->
+
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss active"
+            id="pills-home-tab"
+            data-toggle="pill"
+            data-target="#pills-home"
+            type="button"
+            role="tab"
+            aria-controls="pills-home"
+            aria-selected="true"
+          >
+            Customer Podhupu
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-profile-tab"
+            data-toggle="pill"
+            data-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            Customer Deposit
+          </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-status-tab"
+            data-toggle="pill"
+            data-target="#pills-status"
+            type="button"
+            role="tab"
+            aria-controls="pills-status"
+            aria-selected="false"
+          >
+            Customer Withdraw
+          </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-active-tab"
+            data-toggle="pill"
+            data-target="#pills-active"
+            type="button"
+            role="tab"
+            aria-controls="pills-active"
+            aria-selected="false"
+          >
+            Customer Appu
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content tab-contentss" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-home"
+          role="tabpanel"
+          aria-labelledby="pills-home-tab"
+        >
+          <table
+            id="myTable"
+            class="table table-striped border color-table inverse-table"
+          >
+            <thead class="table-color">
+              <tr class="text-back">
+                <th>S.NO</th>
+                <th>PODHUPU AMOUNT</th>
+                <th>FINE</th>
+                <th>INTEREST</th>
+                <th>TOTAL</th>
+                <th>STATUS</th>
+                <th>DATE</th>
+              </tr>
+            </thead>
+
+            <tbody class="text-center">
+              <tr *ngFor="let data of CustomerPodupuData; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ data?.podhupuAmount }}</td>
+                <td>{{ data?.fine }}</td>
+                <td>{{ data?.interest }}</td>
+                <td>{{ data?.Total }}</td>
+                <td [style.color]="data?.textColor">{{ data?.status }}</td>
+                <td>{{ data?.date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          class="tab-pane fade"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+          <div class="brand_details animated zoomIn">
+            <table
+              id="myTable"
+              class="table table-striped border color-table inverse-table"
+            >
+              <thead class="table-color">
+                <tr class="text-back">
+                  <th>S.NO</th>
+                  <th>DEPOSIT AMOUNT</th>
+                  <th>INTEREST</th>
+                  <th>WITHDRAW</th>
+                  <th>TOTAL</th>
+                  <th>DATE</th>
+                  <!-- <th>Actions</th> -->
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr *ngFor="let data of CustomerdepositData; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ data?.depositAmount }}</td>
+                  <td>{{ data?.interest }}</td>
+                  <td>{{ data?.withdraw }}</td>
+                  <td>{{ data?.total }}</td>
+                  <td>{{ data?.date }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div
+          class="tab-pane fade"
+          id="pills-status"
+          role="tabpanel"
+          aria-labelledby="pills-status-tab"
+        >
+          <table
+            id="myTable"
+            class="table table-striped border color-table inverse-table"
+          >
+            <thead class="table-color">
+              <tr class="text-back">
+                <th>S.NO</th>
+                <th>AMOUNT</th>
+                <th>TOTAL</th>
+                <th>DATE</th>
+              </tr>
+            </thead>
+
+            <tbody class="text-center">
+              <tr *ngFor="let data of CustomerwithdrawData; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ data?.amount }}</td>
+                <td>{{ data?.total }}</td>
+                <td>{{ data?.date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          class="tab-pane fade"
+          id="pills-active"
+          role="tabpanel"
+          aria-labelledby="pills-active-tab"
+        >
+          <table
+            id="myTable"
+            class="table table-striped border color-table inverse-table"
+          >
+            <thead class="table-color">
+              <tr class="text-back">
+                <th>S.NO</th>
+                <th>APPU AMOUNT</th>
+                <th>FINE</th>
+                <th>INTEREST</th>
+                <th>PAIDAMOUNT</th>
+                <th>TOTAL</th>
+                <th>TIME PERIOD</th>
+                <th>DATE</th>
+                <th>DUE DATE</th>
+                <th>APPUSTATUS</th>
+                <th>APPROVESTATUS</th>
+              </tr>
+            </thead>
+
+            <tbody class="text-center">
+              <tr *ngFor="let data of CustomerAppuData; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ data?.appuAmount }}</td>
+                <td>{{ data?.fine }}</td>
+                <td>{{ data?.interest }}</td>
+                <td>{{ data?.paidAmount }}</td>
+                <td>{{ data?.total }}</td>
+                <td>{{ data?.timePeriod }}</td>
+                <td>{{ data?.date }}</td>
+                <td>{{ data?.dueDate }}</td>
+                <td>{{ data?.appuStatus }}</td>
+                <td>{{ data?.approveStatus }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END-ALL-CUSTOMER-PODHUPU,DEPOSITS,WITHDRAW,APPU-LISTS -->
