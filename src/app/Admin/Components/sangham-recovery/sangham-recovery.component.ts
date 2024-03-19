@@ -33,6 +33,7 @@ export class SanghamRecoveryComponent implements OnInit {
   MonthlyAppuListData: any;
   MonthlyMessage: any;
   appuRecoveryTotal: any;
+  MonthlytransactionsData: any;
 
   constructor(private Services: SangamService, private router: Router) {
 
@@ -53,6 +54,7 @@ export class SanghamRecoveryComponent implements OnInit {
     this.AddAppuPending();
     this.ViewSanghamBalance();
     this.MonthlyAppuList();
+    this.Monthlytransactions();
     this.sanghamId = JSON.parse(localStorage.getItem("customer-sanghamId"));
     console.log("memo..........", this.sanghamId)
   }
@@ -374,6 +376,32 @@ export class SanghamRecoveryComponent implements OnInit {
             .trim();
         });
       }
+    })
+
+  }
+
+
+  Monthlytransactions(){
+
+    this.sanghamId = JSON.parse(localStorage.getItem("customer-sanghamId"));
+
+    let transactionObj = {
+      sanghamId: this.sanghamId.sanghamId,
+    }
+
+    this.Services.TransactionsList(transactionObj).subscribe((MonthlyResp)=>{
+      
+      if(MonthlyResp.statusCode == 200){
+        this.MonthlytransactionsData = MonthlyResp.data;
+        console.log("Monthly-List", this.MonthlytransactionsData)
+      }
+      this.MonthlytransactionsData.forEach((item) => {
+        item.date = item.date
+          .split(' ')
+          .slice(1, 4)
+          .join(' ')
+          .trim();
+      });
     })
 
   }

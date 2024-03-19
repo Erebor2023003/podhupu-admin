@@ -429,6 +429,15 @@ export class SangamService {
             return this.httpClient.post(environment.baseUrl + "appu/monthlyappulist",data)
           }catch(error){}
         }
+
+
+        // monthlytransactions
+
+        public TransactionsList(data:any): Observable<any>{
+          try{
+            return this.httpClient.post(environment.baseUrl + "agent/monthlytransactions",data)
+          }catch(error){}
+        }
   
 
 

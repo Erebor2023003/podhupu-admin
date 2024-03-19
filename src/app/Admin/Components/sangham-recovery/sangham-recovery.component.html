@@ -128,6 +128,21 @@
             Appu
           </button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-transactions-tab-2"
+            data-toggle="pill"
+            data-target="#pills-transactions-2"
+            type="button"
+            role="tab"
+            aria-controls="pills-transactions-2"
+            aria-selected="false"
+            (click)="Monthlytransactions()"
+          >
+            MonthlyList
+          </button>
+        </li>
       </ul>
 
       <div class="tab-content tab-contentss" id="pills-tabContent">
@@ -566,7 +581,11 @@
                         <button
                           type="button"
                           class="btn btn-dark new-add-color-one"
-                          (click)="AddAppuPending(); AddAppuRecovery(); MonthlyAppuList()"
+                          (click)="
+                            AddAppuPending();
+                            AddAppuRecovery();
+                            MonthlyAppuList()
+                          "
                         >
                           Submit
                         </button>
@@ -612,7 +631,6 @@
               </button>
               <span class="count-text-appu">{{ appuPendingCount }}</span>
             </li>
-
 
             <li class="nav-item col-md-4" role="presentation">
               <button
@@ -673,20 +691,18 @@
                       </div>
                     </div>
                   </div>
-                  <div class="shadow-lg back-view-point p-3 mt-4 mb-5 bg-white rounded">
+                  <div
+                    class="shadow-lg back-view-point p-3 mt-4 mb-5 bg-white rounded"
+                  >
                     <div class="User_detailss text-center">
                       <label class="demo-color1">RECOVERED TOTAL</label>
                       <p class="user-new1">
                         <b
-                          ><span class="pr-2">₹</span
-                          >{{ appuRecoveryTotal}}</b
+                          ><span class="pr-2">₹</span>{{ appuRecoveryTotal }}</b
                         >
                       </p>
                     </div>
-
                   </div>
-                 
-
                 </div>
               </div>
             </div>
@@ -732,22 +748,20 @@
               </div>
             </div>
 
-
             <div
-            class="tab-pane fade"
-            id="pills-appumonthly"
-            role="tabpanel"
-            aria-labelledby="pills-appumonthly-tab"
-          >
-            <div class="container">
-              <div class="row">
-                <div
-                  class="col-md-6 mt-2 mb-2"
-                  *ngFor="let data of MonthlyAppuListData; let i = index"
-                >
-                  <div class="shadow-text p-3 mt-3 mb-2 bg-white rounded">
-                    <div class="d-flex">
-                      <div class="Pohupu m-auto">
+              class="tab-pane fade"
+              id="pills-appumonthly"
+              role="tabpanel"
+              aria-labelledby="pills-appumonthly-tab"
+            >
+              <div class="container">
+                <div class="row">
+                  <div
+                    class="col-md-6 mt-2 mb-2"
+                    *ngFor="let data of MonthlyAppuListData; let i = index"
+                  >
+                    <div class="shadow-text p-3 mt-3 mb-2 bg-white rounded">
+                      <div class="Pohupu m-auto text-center">
                         <img
                           href="./index1.html"
                           src="{{ BaseUrl }}{{
@@ -756,17 +770,21 @@
                           alt="#"
                         />
                       </div>
-                      <div class="col-deposit">
-                        <p><b>Name: </b>{{ data?.customerId[0]?.firstName }}</p>
-                        <p><b>AppuAmount: </b>{{ data?.appuAmount }}</p>
-                        <p><b>Interest: </b>{{ data?.interest }}</p>
-                        <p><b>PaidAmount: </b>{{ data?.paidAmount }}</p>
-                      </div>
-                      <div class="col-deposit">
-                        <p><b>Date: </b>{{ data?.date }}</p>
-                        <p><b>DueDate: </b>{{ data?.dueDate }}</p>
-                        <p><b>Fine: </b>{{ data?.fine }}</p>
-                        <p><b>Total: </b>{{ data?.total }}</p>
+                      <div class="d-flex">
+                        <div class="col-deposit-appulist">
+                          <p>
+                            <b>Name: </b>{{ data?.customerId[0]?.firstName }}
+                          </p>
+                          <p><b>AppuAmount: </b>{{ data?.appuAmount }}</p>
+                          <p><b>Interest: </b>{{ data?.interest }}</p>
+                          <p><b>PaidAmount: </b>{{ data?.paidAmount }}</p>
+                        </div>
+                        <div class="col-deposit-appulist">
+                          <p><b>Date: </b>{{ data?.date }}</p>
+                          <p><b>DueDate: </b>{{ data?.dueDate }}</p>
+                          <p><b>Fine: </b>{{ data?.fine }}</p>
+                          <p><b>Total: </b>{{ data?.total }}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -774,15 +792,60 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div
+          class="tab-pane fade"
+          id="pills-transactions-2"
+          role="tabpanel"
+          aria-labelledby="pills-transactions-tab-2"
+        >
+        <section class="brands_Upload_section">
+          <div class="card">
+            <div class="card-body">
+              <div class="brands_header animated zoomIn">
+                <h4 class="card-title">Monthly-Transactions-List</h4>
+              </div>
+        
+              <div class="brand_details table-responsive animated zoomIn">
+                <table
+                  id="myTable"
+                  class="table table-striped border color-table inverse-table"
+                >
+                  <thead>
+                    <tr class="text-back">
+                      <th>S.NO</th>
+                      <th>DATE</th>
+                      <th>PODHUPU</th>
+                      <th>DEPOSIT</th>
+                      <th>WITHDRAW</th>
+                      <th>APPUINTEREST</th>
+                      <th>APPURECOVER</th>
+                      <th>TOTAL</th>
+                    </tr>
+                  </thead>
+        
+                  <tbody>
+                    <tr *ngFor="let data of MonthlytransactionsData; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ data?.date }}</td>
+                      <td>{{ data?.podupu }}</td>
+                      <td>{{ data?.deposit }}</td>
+                      <td>{{ data?.withdraw }}</td>
+                      <td>{{ data?.appuInterest }}</td>
+                      <td>{{ data?.appuRecover }}</td>
+                      <td>{{ data?.total }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
+      </section>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-
-
-
 
 <!-- END-ALL-CUSTOMER-PODHUPU,DEPOSITS,WITHDRAW,APPU-LISTS -->
